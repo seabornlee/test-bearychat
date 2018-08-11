@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages("Echo") {
+        stage {
+            steps {
+                sh "echo 'do some preparation'"
+            }
+        }
+    }
+
+    post {
+        success {
+          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Success** for PR ${PR_MD_URL}",
+                        color: '#0000FF',
+                        attachmentText: "${env.LOG_MD_URL}"
+        }
+        failure {
+          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Failure** for PR ${PR_MD_URL}",
+                        color: '#FF0000',
+                        attachmentText: "${env.LOG_MD_URL}"
+        }
+        unstable {
+          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Unstable** for PR ${PR_MD_URL}",
+                        color: '#808080',
+                        attachmentText: "${env.LOG_MD_URL}"
+        }
+        aborted {
+          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Aborted** for PR ${PR_MD_URL}",
+                        color: '#000000',
+                        attachmentText: "${env.LOG_MD_URL}"
+        }
+    }
+}
