@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    stages("Echo") {
-        stage {
+    stages {
+        stage("Echo") {
             steps {
                 sh "echo 'do some preparation'"
             }
