@@ -11,27 +11,27 @@ pipeline {
 
     post {
         success {
-          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Success** for PR ${PR_MD_URL}",
+          bearychatSend message: "Started [${env.JOB_NAME} #${env.BUILD_NUMBER}](${env.BUILD_URL})",
                         color: '#0000FF',
-                        attachmentText: "${env.LOG_MD_URL}",
+                        attachmentText: "Build Succeed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                         channel: "Timeline"
         }
         failure {
-          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Failure** for PR ${PR_MD_URL}",
+          bearychatSend message: "Started [${env.JOB_NAME} #${env.BUILD_NUMBER}](${env.BUILD_URL})",
                         color: '#FF0000',
-                        attachmentText: "${env.LOG_MD_URL}",
+                        attachmentText: "Build Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                         channel: "Timeline"
         }
         unstable {
-          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Unstable** for PR ${PR_MD_URL}",
+          bearychatSend message: "Started [${env.JOB_NAME} #${env.BUILD_NUMBER}](${env.BUILD_URL})",
                         color: '#808080',
-                        attachmentText: "${env.LOG_MD_URL}",
+                        attachmentText: "Build Unstable: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                         channel: "Timeline"
         }
         aborted {
-          bearychatSend message: "${env.ghprbPullAuthorLoginMention} **Aborted** for PR ${PR_MD_URL}",
+          bearychatSend message: "Started [${env.JOB_NAME} #${env.BUILD_NUMBER}](${env.BUILD_URL})",
                         color: '#000000',
-                        attachmentText: "${env.LOG_MD_URL}",
+                        attachmentText: "Build Aborted: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                         channel: "Timeline"
         }
     }
